@@ -11,5 +11,15 @@ exports.seed = async function (knex) {
       exercises_id: 1,
       max_weight: 25,
     },
+    {
+      id: 2,
+      exercises_id: 1,
+      max_weight: 35,
+    },
+    {
+      id: 3,
+      exercises_id: 1,
+      max_weight: 15,
+    },
   ]);
 };

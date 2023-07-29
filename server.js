@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.send("hiii");
 });
 app.use("/api/exercises", ExercisesRoute);
-// app.use("/api/max", MaxWeightRoute);
+app.use("/api/max", MaxWeightRoute);
 
 // go!!
 app.listen(PORT, () => {
