@@ -21,6 +21,9 @@ function updateMaxWeight(req, res) {
     .insert(addWeightEntry)
     .then(() => {
       res.status(200).send("Weight Added successfully");
+    })
+    .catch((error) => {
+      res.status(500).send("Error adding weight: " + error.message);
     });
 }
 

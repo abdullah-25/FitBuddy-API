@@ -47,6 +47,7 @@ function postExercise(req, res) {
 
 function findExerciseId(req, res) {
   const { users_id, exercise_name } = req.body;
+  console.log(req.body);
 
   // Find the exercise_id associated with the provided exercise_name and users_id
   knex("exercises")
@@ -72,6 +73,6 @@ function findExerciseId(req, res) {
 
 router.get("/", getExercises);
 router.post("/", postExercise);
-router.get("/id", findExerciseId);
+router.put("/:id", findExerciseId);
 
 module.exports = router;
