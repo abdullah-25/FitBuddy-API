@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 5050;
 
 // middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+  })
+);
 app.use(express.static("public"));
 // Set the maximum request size limit to 10 MB (adjust as needed)
 
