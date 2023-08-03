@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 5050;
 
 // middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+const allowedOrigin =
+  process.env.CORS_ORIGIN || "https://cheerful-strudel-ea903c.netlify.app";
+app.use(cors({ origin: allowedOrigin }));
+
 app.use(express.static("public"));
 // Set the maximum request size limit to 10 MB (adjust as needed)
 
