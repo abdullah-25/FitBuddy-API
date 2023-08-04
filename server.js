@@ -50,6 +50,7 @@ app.post("/userid", (req, res) => {
     .where({ user_name })
     .first()
     .then((id) => {
+      console.log(id);
       res.send(id);
     })
     .catch((err) => {
