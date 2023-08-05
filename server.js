@@ -32,15 +32,38 @@ app.listen(PORT, () => {
 });
 
 app.post("/signup", (req, res) => {
-  console.log(req.body);
+  const { email } = req.body;
 
+  // Check if the user already exists in the database
   knex("users")
-    .insert({ user_name: req.body.email })
-    .then((id) => {
-      res.send(id);
+    .where({ user_name: email })
+    .first()
+    .then((existingUser) => {
+      if (existingUser) {
+        // User already exists, skip creating a new entry
+        return res.status(200).send("User already exists");
+      } else {
+        // User does not exist, create a new entry in the database
+        knex("users")
+          .insert({ user_name: email })
+          .then((id) => {
+            res.status(201).send("User created successfully");
+          })
+          .catch((error) => {
+            res
+              .status(500)
+              .json({ message: "Error creating user: " + error.message });
+          });
+      }
+    })
+    .catch((error) => {
+      res
+        .status(500)
+        .json({
+          message: "Error checking for existing user: " + error.message,
+        });
     });
 });
-
 //api to get userID by providing username from front-end
 app.post("/userid", (req, res) => {
   const { user_name } = req.body;
