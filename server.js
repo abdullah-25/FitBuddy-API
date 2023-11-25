@@ -12,11 +12,8 @@ const PORT = process.env.PORT || 5050;
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      process.env.CORS_ORIGIN_PROD, // Add your production URL (fitbuddy.ca)
-      process.env.CORS_ORIGIN_DEV, // Add your local development URL (http://127.0.0.1:5173)
-    ],
-    optionsSuccessStatus: 200,
+    origin: process.env.CORS_ORIGIN,
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
 app.use(express.static("public"));
