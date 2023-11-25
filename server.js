@@ -12,8 +12,12 @@ const PORT = process.env.PORT || 5050;
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
-    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+    origin: [
+      "https://fitbuddy.ca",
+      "http://127.0.0.1:5173",
+      // Add other origins if needed
+    ],
+    optionsSuccessStatus: 200,
   })
 );
 app.use(express.static("public"));
@@ -57,11 +61,9 @@ app.post("/signup", (req, res) => {
       }
     })
     .catch((error) => {
-      res
-        .status(500)
-        .json({
-          message: "Error checking for existing user: " + error.message,
-        });
+      res.status(500).json({
+        message: "Error checking for existing user: " + error.message,
+      });
     });
 });
 //api to get userID by providing username from front-end
